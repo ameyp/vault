@@ -35,8 +35,16 @@ module "create_vpc" {
   ami_architectures = ["amd64", "arm64"]
 }
 
+module "get_vault_version" {
+  source = "./modules/get_vault_version"
+}
+
 module "read_license" {
   source = "./modules/read_license"
+}
+
+module "vault_autopilot_upgrade_storageconfig" {
+  source = "./modules/vault_autopilot_upgrade_storageconfig"
 }
 
 module "vault_cluster" {
@@ -54,6 +62,10 @@ module "vault_upgrade" {
   source = "./modules/vault_upgrade"
 
   vault_install_dir = var.vault_install_dir
+}
+
+module "vault_verify_autopilot" {
+  source = "./modules/vault_verify_autopilot"
 }
 
 module "vault_verify_raft_auto_join_voter" {
